@@ -10,8 +10,8 @@ import kotlinx.coroutines.flow.flowOn
 class TwitRepository {
 
     companion object{
-        fun getTwit(): Flow<List<Twitt>> = flow {
-            val response = RetrofitBuilder.api.getTwit()
+        fun getTwit(token: String): Flow<Twitt> = flow {
+            val response = RetrofitBuilder.api.getTwit(token)
             emit(response)
         }.flowOn(Dispatchers.IO)
     }

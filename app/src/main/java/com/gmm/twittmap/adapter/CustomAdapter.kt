@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.gmm.twittmap.R
+import com.gmm.twittmap.model.Data
 import com.gmm.twittmap.model.Twitt
 
-class CustomAdapter(private val context: Context, private var dataSet: ArrayList<Twitt>): RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+class CustomAdapter(private val context: Context, private var dataSet: ArrayList<Data>): RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView
@@ -26,14 +27,14 @@ class CustomAdapter(private val context: Context, private var dataSet: ArrayList
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        val post=dataSet[position]
-        viewHolder.textView.text = post.body
+        val twit=dataSet[position]
+        viewHolder.textView.text = twit.text
 
     }
 
     override fun getItemCount() = dataSet.size
 
-    fun setTwit(twitList:ArrayList<Twitt>){
+    fun setTwit(twitList:ArrayList<Data>){
         this.dataSet=twitList
         notifyDataSetChanged()
     }

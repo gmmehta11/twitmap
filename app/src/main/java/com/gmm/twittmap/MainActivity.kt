@@ -2,13 +2,14 @@ package com.gmm.twittmap
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gmm.twittmap.adapter.CustomAdapter
+import com.gmm.twittmap.model.Data
 import com.gmm.twittmap.model.Twitt
 import com.gmm.twittmap.viewmodel.TwitViewModel
-
 
 class MainActivity : AppCompatActivity(){
     private lateinit var recyclerView: RecyclerView
@@ -18,18 +19,19 @@ class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        Log.d("MainActivity", "My 'token' is: " + BuildConfig.TOKEN);
         initUI()
         twitViewModel = ViewModelProvider(this)[TwitViewModel::class.java]
         twitViewModel.getTwit()
         twitViewModel.responseLiveData.observe(this,{
-            customAdapter.setTwit(it as ArrayList<Twitt>)
+            customAdapter.setTwit(it.data as ArrayList<Data>)
 
         })
     }
 
     private fun initUI(){
         recyclerView = findViewById(R.id.recyclerView)
-        customAdapter = CustomAdapter(this@MainActivity, arrayListOf<Twitt>())
+        customAdapter = CustomAdapter(this@MainActivity, arrayListOf<Data>())
         recyclerView.apply {
             setHasFixedSize(true)
             layoutManager=LinearLayoutManager(this@MainActivity)
