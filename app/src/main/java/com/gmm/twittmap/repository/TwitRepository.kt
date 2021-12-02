@@ -1,5 +1,6 @@
 package com.gmm.twittmap.repository
 
+import android.util.Log
 import com.gmm.twittmap.model.Twitt
 import com.gmm.twittmap.network.RetrofitBuilder
 import kotlinx.coroutines.Dispatchers

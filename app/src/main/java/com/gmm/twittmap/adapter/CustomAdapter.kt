@@ -13,9 +13,13 @@ import com.gmm.twittmap.model.Twitt
 class CustomAdapter(private val context: Context, private var dataSet: ArrayList<Data>): RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView
+        val twit: TextView
+        val lat:TextView
+        val lng: TextView
         init {
-            textView = view.findViewById(R.id.textView)
+            twit = view.findViewById(R.id.twit)
+            lat = view.findViewById(R.id.lat)
+            lng = view.findViewById(R.id.lng)
         }
     }
 
@@ -28,8 +32,9 @@ class CustomAdapter(private val context: Context, private var dataSet: ArrayList
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val twit=dataSet[position]
-        viewHolder.textView.text = twit.text
-
+        viewHolder.twit.text = twit.text
+        viewHolder.lat.text = twit?.geo?.coordinates?.coordinates?.get(0)?.toString()
+        viewHolder.lng.text = twit?.geo?.coordinates?.coordinates?.get(1)?.toString()
     }
 
     override fun getItemCount() = dataSet.size
